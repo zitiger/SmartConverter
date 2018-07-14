@@ -3,10 +3,11 @@ package com.zitiger.plugin.converter.generator.impl;
 import com.intellij.lang.jvm.JvmModifier;
 import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiCodeBlock;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementFactory;
 import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiStatement;
 import com.intellij.psi.PsiType;
 import com.intellij.psi.codeStyle.JavaCodeStyleManager;
 import com.zitiger.plugin.converter.exception.ConverterException;
@@ -47,14 +48,14 @@ public class SingleGenerator extends AbstractGenerator {
         statementList.addAll(writeMappedFields(fromName, toName, mappingResult));
         statementList.addAll(writeNotMappedFields(mappingResult.getNotMappedToFieldList(), "TO"));
         statementList.addAll(writeNotMappedFields(mappingResult.getNotMappedFromFieldList(), "FROM"));
-
         statementList.add("return " + toName + ";");
 
         PsiElementFactory elementFactory = JavaPsiFacade.getElementFactory(psiClass.getProject());
+        PsiCodeBlock codeBlock = elementFactory.createCodeBlockFromText("{" + String.join("\n", statementList) + "}", psiClass);
 
-        for (String statement : statementList) {
-            PsiStatement psiStatement = elementFactory.createStatementFromText(statement, psiClass);
-            psiMethod.getBody().add(psiStatement);
+        for (int i = 1; i < codeBlock.getChildren().length - 1; i++) {
+            PsiElement psiElement = codeBlock.getChildren()[i];
+            psiMethod.getBody().add(psiElement);
         }
 
         JavaCodeStyleManager.getInstance(psiClass.getProject()).shortenClassReferences(psiMethod);
@@ -90,7 +91,7 @@ public class SingleGenerator extends AbstractGenerator {
     private String buildMethodSignature(PsiClass to, String toName) {
         StringBuilder builder = new StringBuilder("");
 
-        builder.append(to.getQualifiedName()).append(" " + toName + " = new ").append(to.getQualifiedName()).append("();\n");
+        builder.append(to.getQualifiedName()).append(" " + toName + " = new ").append(to.getQualifiedName()).append("();");
         return builder.toString();
     }
 
