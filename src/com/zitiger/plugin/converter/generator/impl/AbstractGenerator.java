@@ -52,10 +52,10 @@ public abstract class AbstractGenerator implements ConverterGenerator {
             throw new ConverterException("The return of method is void");
         }
 
-//        PsiTypeElement returnTypeElement = method.getReturnTypeElement();
-//        if(null == returnTypeElement){
-//            throw new ConverterException("Can not find return type");
-//        }
+        //        PsiTypeElement returnTypeElement = method.getReturnTypeElement();
+        //        if(null == returnTypeElement){
+        //            throw new ConverterException("Can not find return type");
+        //        }
 
         return PsiTypesUtil.getPsiClass(returnType);
     }

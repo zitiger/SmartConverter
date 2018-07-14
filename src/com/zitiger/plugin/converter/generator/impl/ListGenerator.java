@@ -21,7 +21,7 @@ public class ListGenerator extends SingleGenerator {
     @Override
     void generateCode(PsiClass psiClass, PsiMethod psiMethod) throws ConverterException {
 
-        if(null == psiMethod.getBody()){
+        if (null == psiMethod.getBody()) {
             throw new ConverterException("Method body is null");
         }
 
@@ -92,7 +92,7 @@ public class ListGenerator extends SingleGenerator {
 
         for (PsiMethod classMethod : psiMethodList) {
 
-            if(classMethod.getParameterList().getParametersCount() != 1 || classMethod.getReturnType() == null){
+            if (classMethod.getParameterList().getParametersCount() != 1 || classMethod.getReturnType() == null) {
                 continue;
             }
 
@@ -127,11 +127,9 @@ public class ListGenerator extends SingleGenerator {
             throw new ConverterException("Can not find the return of method");
         }
 
-
         if (PsiType.VOID.equals(returnType)) {
             throw new ConverterException("The return of method is void");
         }
-
 
         PsiType returnPsiType = ((PsiClassType) returnType).getParameters()[0];
         return PsiTypesUtil.getPsiClass(returnPsiType);

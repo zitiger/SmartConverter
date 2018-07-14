@@ -21,16 +21,13 @@ public class SingleGenerator extends AbstractGenerator {
     @Override
     void generateCode(PsiClass psiClass, PsiMethod psiMethod) throws ConverterException {
 
-
         if (psiMethod.isConstructor()) {
             throw new ConverterException("Method is the constructor");
         }
 
-
-        if(null == psiMethod.getBody()){
+        if (null == psiMethod.getBody()) {
             throw new ConverterException("Method body is null");
         }
-
 
         PsiClass fromClass = getParamPsiClass(psiMethod);
         PsiClass toClass = getReturnPsiClass(psiMethod);
@@ -57,13 +54,11 @@ public class SingleGenerator extends AbstractGenerator {
 
         for (String statement : statementList) {
             PsiStatement psiStatement = elementFactory.createStatementFromText(statement, psiClass);
-                psiMethod.getBody().add(psiStatement);
+            psiMethod.getBody().add(psiStatement);
         }
 
         JavaCodeStyleManager.getInstance(psiClass.getProject()).shortenClassReferences(psiMethod);
     }
-
-
 
     private void processToFields(FieldMappingResult mappingResult, PsiClass from, PsiClass to) {
         for (PsiField toField : to.getFields()) {

@@ -5,5 +5,5 @@ import org.jetbrains.annotations.NotNull;
 
 public interface ConverterGenerator {
 
-    void generate(@NotNull  PsiMethod element) ;
+    void generate(@NotNull PsiMethod element);
 }
