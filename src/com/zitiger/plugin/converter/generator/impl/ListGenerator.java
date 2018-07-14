@@ -64,7 +64,7 @@ public class ListGenerator extends SingleGenerator {
     private PsiMethod createSingleConvertMethod(PsiClass psiClass, String paramGenericClassName, String returnGenericClassName) throws ConverterException {
         PsiElementFactory elementFactory = JavaPsiFacade.getElementFactory(psiClass.getProject());
 
-        StringBuilder sbSingleConvertMethod = new StringBuilder("public static ");
+        StringBuilder sbSingleConvertMethod = new StringBuilder("private static ");
         sbSingleConvertMethod.append(returnGenericClassName);
         sbSingleConvertMethod.append(" to" + returnGenericClassName + "(");
         sbSingleConvertMethod.append(paramGenericClassName);
@@ -91,6 +91,11 @@ public class ListGenerator extends SingleGenerator {
         PsiMethod[] psiMethodList = psiClass.getMethods();
 
         for (PsiMethod classMethod : psiMethodList) {
+
+            if(classMethod.getParameterList().getParametersCount() != 1 || classMethod.getReturnType() == null){
+                continue;
+            }
+
             PsiClass methodParamPsiClass = getParamPsiClass(classMethod);
             PsiClass methodReturnPsiClass = getReturnPsiClass(classMethod);
 
