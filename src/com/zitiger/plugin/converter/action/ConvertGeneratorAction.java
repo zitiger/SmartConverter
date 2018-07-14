@@ -52,7 +52,7 @@ public class ConvertGeneratorAction extends AnAction {
 
     private ConverterGenerator getGenerator(PsiMethod method) throws ConverterException {
         PsiTypeElement returnType = method.getReturnTypeElement();
-        if(null == returnType){
+        if (null == returnType) {
             throw new ConverterException("This method does not have return type");
         }
 

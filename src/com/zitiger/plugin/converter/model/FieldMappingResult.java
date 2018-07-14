@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public class FieldMappingResult {
 
     /**
@@ -42,6 +41,5 @@ public class FieldMappingResult {
     public void addNotMappedFromField(String fromField) {
         notMappedFromFieldList.add(fromField);
     }
-
 
 }
