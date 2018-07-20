@@ -64,7 +64,7 @@ public class SingleGenerator extends AbstractGenerator {
     private void processToFields(FieldMappingResult mappingResult, PsiClass from, PsiClass to) {
         for (PsiField toField : to.getFields()) {
             String toFieldName = toField.getName();
-            if (toFieldName != null && !toField.hasModifier(JvmModifier.STATIC)) {
+            if (toFieldName != null && !toField.getModifierList().hasExplicitModifier("static")) {
                 PsiMethod toSetter = findSetter(to, toFieldName);
                 PsiMethod fromGetter = findGetter(from, toFieldName);
                 if (toSetter != null && fromGetter != null && isMatchingFieldType(toField, fromGetter)) {
@@ -79,7 +79,7 @@ public class SingleGenerator extends AbstractGenerator {
     private void processFromFields(FieldMappingResult mappingResult, PsiClass from) {
         for (PsiField fromField : from.getFields()) {
             String fromFieldName = fromField.getName();
-            if (fromFieldName != null && !fromField.hasModifier(JvmModifier.STATIC)) {
+            if (fromFieldName != null && !fromField.getModifierList().hasExplicitModifier("static")) {
                 PsiMethod fromGetter = findGetter(from, fromFieldName);
                 if (fromGetter == null || !mappingResult.getMappedFieldMap().containsValue(fromGetter)) {
                     mappingResult.addNotMappedFromField(fromFieldName);
