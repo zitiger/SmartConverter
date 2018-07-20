@@ -27,12 +27,14 @@
     </extensions>
 
     <actions>
-        <!-- Add your actions here -->
-        <action id="com.zitiger.plugin.converter.action.generator" class="com.zitiger.plugin.converter.action.ConvertGeneratorAction" text="Converter" description="Converter">
+        <group id="com.zitiger.plugin.converter.generate.group" popup="true">
+            <separator/>
+            <!-- Add your actions here -->
+            <action id="com.zitiger.plugin.converter.action.generator" class="com.zitiger.plugin.converter.action.ConvertGeneratorAction" text="Converter" description="Converter">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift meta N"/>
+            </action>
             <add-to-group group-id="GenerateGroup" anchor="last"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="shift meta N"/>
-        </action>
-
+        </group>
     </actions>
 
 </idea-plugin>
