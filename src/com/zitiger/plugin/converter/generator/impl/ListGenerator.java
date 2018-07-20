@@ -26,8 +26,8 @@ public class ListGenerator extends SingleGenerator {
         }
 
         PsiElementFactory elementFactory = JavaPsiFacade.getElementFactory(psiClass.getProject());
-        String returnGenericClassName = getGenericReturnPsiClass(psiMethod).getQualifiedName();
-        String paramGenericClassName = getGenericParamPsiClass(psiMethod).getQualifiedName();
+        String returnGenericClassName = getGenericReturnPsiClass(psiMethod).getName();
+        String paramGenericClassName = getGenericParamPsiClass(psiMethod).getName();
         String camelParamGenericClassName = StringUtils.toCamelCase(paramGenericClassName);
         String paramVariableName = psiMethod.getParameterList().getParameters()[0].getName();
 
