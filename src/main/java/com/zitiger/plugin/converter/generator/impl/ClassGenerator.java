@@ -8,8 +8,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementFactory;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.codeStyle.JavaCodeStyleManager;
-import org.apache.commons.lang.StringUtils;
 import com.zitiger.plugin.converter.exception.ConverterException;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * @author zitiger
@@ -48,16 +48,16 @@ public class ClassGenerator extends ListGenerator {
 
         PsiElementFactory elementFactory = JavaPsiFacade.getElementFactory(psiClass.getProject());
 
-        StringBuilder sbSingleConvertMethod = new StringBuilder("public static java.util.List<");
-        sbSingleConvertMethod.append(toPsiClass.getQualifiedName());
-        sbSingleConvertMethod.append("> " + methodName + "(List<");
-        sbSingleConvertMethod.append(fromPsiClass.getQualifiedName());
-        sbSingleConvertMethod.append("> ");
-        sbSingleConvertMethod.append(StringUtils.uncapitalize(fromPsiClass.getName()));
-        sbSingleConvertMethod.append("List) {\n");
-        sbSingleConvertMethod.append("}\n");
+        String listConvertMethod = "public static java.util.List<";
+        listConvertMethod += toPsiClass.getQualifiedName();
+        listConvertMethod += "> " + methodName + "(List<";
+        listConvertMethod += fromPsiClass.getQualifiedName();
+        listConvertMethod += "> ";
+        listConvertMethod += StringUtils.uncapitalize(fromPsiClass.getName());
+        listConvertMethod += "List) {\n";
+        listConvertMethod += "}\n";
 
-        PsiMethod singleConvertMethod = elementFactory.createMethodFromText(sbSingleConvertMethod.toString(), psiClass);
+        PsiMethod singleConvertMethod = elementFactory.createMethodFromText(listConvertMethod, psiClass);
         PsiElement method = psiClass.add(singleConvertMethod);
         JavaCodeStyleManager.getInstance(psiClass.getProject()).shortenClassReferences(method);
 

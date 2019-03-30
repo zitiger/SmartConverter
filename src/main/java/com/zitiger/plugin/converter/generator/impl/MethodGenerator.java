@@ -13,6 +13,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiFileFactory;
 import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.PsiMethod;
+import com.intellij.psi.PsiModifier;
 import com.intellij.psi.PsiParameter;
 import com.intellij.psi.PsiType;
 import com.intellij.psi.codeStyle.JavaCodeStyleManager;
@@ -82,7 +83,7 @@ public class MethodGenerator extends AbstractGenerator {
     private void processToFields(FieldMappingResult mappingResult, PsiClass from, PsiClass to) {
         for (PsiField toField : to.getAllFields()) {
             String toFieldName = toField.getName();
-            if (toFieldName != null && !toField.getModifierList().hasExplicitModifier("static")) {
+            if (toFieldName != null && !toField.getModifierList().hasExplicitModifier(PsiModifier.STATIC)) {
                 PsiMethod toSetter = findSetter(to, toFieldName);
                 PsiMethod fromGetter = findGetter(from, toFieldName);
                 if (toSetter == null || fromGetter == null) {
@@ -131,7 +132,7 @@ public class MethodGenerator extends AbstractGenerator {
     private void processFromFields(FieldMappingResult mappingResult, PsiClass from) {
         for (PsiField fromField : from.getAllFields()) {
             String fromFieldName = fromField.getName();
-            if (fromFieldName != null && !fromField.getModifierList().hasExplicitModifier("static")) {
+            if (fromFieldName != null && !fromField.getModifierList().hasExplicitModifier(PsiModifier.STATIC)) {
                 PsiMethod fromGetter = findGetter(from, fromFieldName);
                 boolean isMapped = mappingResult.getMappedFieldMap().containsValue(fromGetter) || mappingResult.getMappedObjectMap().containsValue(fromGetter) || mappingResult.getMappedListMap().containsValue(fromGetter);
                 if (fromGetter == null || !isMapped) {
@@ -142,10 +143,8 @@ public class MethodGenerator extends AbstractGenerator {
     }
 
     private String buildNewStatement(PsiClass to, String toName) {
-        StringBuilder builder = new StringBuilder();
 
-        builder.append(to.getQualifiedName()).append(" " + toName + " = new ").append(to.getQualifiedName()).append("();");
-        return builder.toString();
+        return to.getQualifiedName() + " " + toName + " = new " + to.getQualifiedName() + "();";
     }
 
     private List<String> writeMappedFields(String fromName, String toName, FieldMappingResult mappingResult) {

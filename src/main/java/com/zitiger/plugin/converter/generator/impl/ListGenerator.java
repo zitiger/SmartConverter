@@ -70,16 +70,16 @@ public class ListGenerator extends MethodGenerator {
     private PsiMethod createSingleConvertMethod(PsiClass psiClass, String paramGenericClassName, String returnGenericClassName) throws ConverterException {
         PsiElementFactory elementFactory = JavaPsiFacade.getElementFactory(psiClass.getProject());
 
-        StringBuilder sbSingleConvertMethod = new StringBuilder("public static ");
-        sbSingleConvertMethod.append(returnGenericClassName);
-        sbSingleConvertMethod.append(" to" + returnGenericClassName + "(");
-        sbSingleConvertMethod.append(paramGenericClassName);
-        sbSingleConvertMethod.append(" ");
-        sbSingleConvertMethod.append(StringUtils.uncapitalize(paramGenericClassName));
-        sbSingleConvertMethod.append(") {\n");
-        sbSingleConvertMethod.append("}\n");
+        String singleConvertMethodContent = "public static ";
+        singleConvertMethodContent += returnGenericClassName;
+        singleConvertMethodContent += " to" + returnGenericClassName + "(";
+        singleConvertMethodContent += paramGenericClassName;
+        singleConvertMethodContent += " ";
+        singleConvertMethodContent += StringUtils.uncapitalize(paramGenericClassName);
+        singleConvertMethodContent += ") {\n";
+        singleConvertMethodContent += "}\n";
 
-        PsiMethod singleConvertMethod = elementFactory.createMethodFromText(sbSingleConvertMethod.toString(), psiClass);
+        PsiMethod singleConvertMethod = elementFactory.createMethodFromText(singleConvertMethodContent, psiClass);
         PsiElement method = psiClass.add(singleConvertMethod);
         JavaCodeStyleManager.getInstance(psiClass.getProject()).shortenClassReferences(method);
 

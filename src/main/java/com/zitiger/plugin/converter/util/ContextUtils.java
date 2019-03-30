@@ -8,7 +8,6 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiVariable;
 import com.intellij.psi.util.PsiTreeUtil;
 
 /**
