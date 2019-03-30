@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.4.7'
+}
+
+group 'com.zitiger.plugin'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.freemarker', name: 'freemarker', version: '2.3.28'
+}
+
+intellij {
+    version '2016.1.1'
+}
+patchPluginXml {
+    changeNotes """
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>"""
+}
