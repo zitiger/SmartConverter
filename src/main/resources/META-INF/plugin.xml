@@ -30,7 +30,7 @@
         <group id="com.zitiger.plugin.converter.generate.group" popup="true">
             <separator/>
             <!-- Add your actions here -->
-            <action id="com.zitiger.plugin.converter.action.generator" class="com.zitiger.plugin.converter.action.ConvertGeneratorAction" text="Converter" description="Converter">
+            <action id="com.zitiger.plugin.converter.action.generator" class="com.zitiger.plugin.converter.action.ConvertGeneratorAction" text="Smart Converter" description="Smart Converter">
                 <keyboard-shortcut keymap="$default" first-keystroke="shift meta N"/>
             </action>
             <add-to-group group-id="GenerateGroup" anchor="last"/>
