@@ -11,6 +11,10 @@ import com.zitiger.plugin.converter.exception.ConverterException;
 import com.zitiger.plugin.converter.generator.ConverterGenerator;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * @author zitiger
+ * @version 0.13.0
+ */
 public abstract class AbstractGenerator implements ConverterGenerator {
 
     @Override
@@ -33,6 +37,12 @@ public abstract class AbstractGenerator implements ConverterGenerator {
 
     }
 
+    /**
+     * Generate code
+     * @param psiClass class
+     * @param psiMethod method
+     * @throws ConverterException
+     */
     abstract void generateCode(PsiClass psiClass, PsiMethod psiMethod) throws ConverterException;
 
     PsiClass getParamPsiClass(PsiMethod method) throws ConverterException {

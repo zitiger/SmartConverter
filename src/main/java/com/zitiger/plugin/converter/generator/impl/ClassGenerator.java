@@ -11,6 +11,10 @@ import com.intellij.psi.codeStyle.JavaCodeStyleManager;
 import org.apache.commons.lang.StringUtils;
 import com.zitiger.plugin.converter.exception.ConverterException;
 
+/**
+ * @author zitiger
+ * @version 0.13.0
+ */
 public class ClassGenerator extends ListGenerator {
 
     public void generateCode(PsiClass psiClass, PsiClass fromPsiClass, PsiClass toPsiClass) throws ConverterException {

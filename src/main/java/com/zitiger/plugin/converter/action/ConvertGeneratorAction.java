@@ -18,7 +18,13 @@ import com.zitiger.plugin.converter.generator.impl.ListGenerator;
 import com.zitiger.plugin.converter.generator.impl.MethodGenerator;
 import com.zitiger.plugin.converter.util.ContextUtils;
 
+/**
+ * @author zitiger
+ * @version 0.13.0
+ */
 public class ConvertGeneratorAction extends AnAction {
+
+    public static final String LIST_TYPE_PREX = "List<";
 
     @Override
     public void actionPerformed(AnActionEvent e) {
@@ -91,7 +97,7 @@ public class ConvertGeneratorAction extends AnAction {
         }
 
         String type = returnType.getText();
-        if (type.contains("List")) {
+        if (type.startsWith(LIST_TYPE_PREX)) {
             return new ListGenerator();
         } else {
             return new MethodGenerator();

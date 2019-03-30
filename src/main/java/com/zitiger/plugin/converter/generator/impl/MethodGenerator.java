@@ -27,6 +27,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author zitiger
+ * @version 0.13.0
+ */
 public class MethodGenerator extends AbstractGenerator {
 
     @Override
@@ -129,7 +133,8 @@ public class MethodGenerator extends AbstractGenerator {
             String fromFieldName = fromField.getName();
             if (fromFieldName != null && !fromField.getModifierList().hasExplicitModifier("static")) {
                 PsiMethod fromGetter = findGetter(from, fromFieldName);
-                if (fromGetter == null || (!mappingResult.getMappedFieldMap().containsValue(fromGetter)) && !mappingResult.getMappedObjectMap().containsValue(fromGetter) && !mappingResult.getMappedListMap().containsValue(fromGetter)) {
+                boolean isMapped = mappingResult.getMappedFieldMap().containsValue(fromGetter) || mappingResult.getMappedObjectMap().containsValue(fromGetter) || mappingResult.getMappedListMap().containsValue(fromGetter);
+                if (fromGetter == null || !isMapped) {
                     mappingResult.addNotMappedFromField(fromFieldName);
                 }
             }

@@ -16,6 +16,10 @@ import com.zitiger.plugin.converter.exception.ConverterException;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * @author zitiger
+ * @version 0.13.0
+ */
 public class ListGenerator extends MethodGenerator {
 
     @Override
