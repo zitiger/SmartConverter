@@ -11,13 +11,12 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiTypeElement;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.zitiger.plugin.converter.util.ContextUtils;
-import com.zitiger.plugin.converter.util.PsiClassUtils;
 import com.zitiger.plugin.converter.exception.ConverterException;
 import com.zitiger.plugin.converter.generator.ConverterGenerator;
 import com.zitiger.plugin.converter.generator.impl.ClassGenerator;
 import com.zitiger.plugin.converter.generator.impl.ListGenerator;
 import com.zitiger.plugin.converter.generator.impl.MethodGenerator;
+import com.zitiger.plugin.converter.util.ContextUtils;
 
 public class ConvertGeneratorAction extends AnAction {
 
@@ -59,17 +58,6 @@ public class ConvertGeneratorAction extends AnAction {
             psiClasses[1] = toClass;
         }
 
-        //        ConverterDialog generateConverterDialog = new ConverterDialog(psiClass);
-        //        generateConverterDialog.show();
-        //        if (generateConverterDialog.isOK()) {
-        //            PsiClass classFrom = generateConverterDialog.getConvertFromClass();
-        //            PsiClass classTo = generateConverterDialog.getConvertToClass();
-        //
-        //            psiClasses[0] = classFrom;
-        //            psiClasses[1] = classTo;
-        //
-        //            return psiClasses;
-        //        }
         return psiClasses;
     }
 

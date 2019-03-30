@@ -137,7 +137,7 @@ public class MethodGenerator extends AbstractGenerator {
     }
 
     private String buildNewStatement(PsiClass to, String toName) {
-        StringBuilder builder = new StringBuilder("");
+        StringBuilder builder = new StringBuilder();
 
         builder.append(to.getQualifiedName()).append(" " + toName + " = new ").append(to.getQualifiedName()).append("();");
         return builder.toString();
