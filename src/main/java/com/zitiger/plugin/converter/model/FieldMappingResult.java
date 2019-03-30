@@ -3,7 +3,7 @@ package com.zitiger.plugin.converter.model;
 import com.intellij.psi.PsiMethod;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,10 +13,23 @@ public class FieldMappingResult {
      * Key is a Setter method for To class field
      * Value is a Getter method for From class field
      */
-    private final Map<PsiMethod, PsiMethod> mappedFieldMap = new HashMap<>();
+    private final Map<PsiMethod, PsiMethod> mappedFieldMap = new LinkedHashMap<>();
+
+    private final Map<PsiMethod, PsiMethod> mappedListMap = new LinkedHashMap<>();
+
+    private final Map<PsiMethod, PsiMethod> mappedObjectMap = new LinkedHashMap<>();
 
     private final List<String> notMappedToFieldList = new ArrayList<>();
+
     private final List<String> notMappedFromFieldList = new ArrayList<>();
+
+    public Map<PsiMethod, PsiMethod> getMappedListMap() {
+        return mappedListMap;
+    }
+
+    public Map<PsiMethod, PsiMethod> getMappedObjectMap() {
+        return mappedObjectMap;
+    }
 
     public Map<PsiMethod, PsiMethod> getMappedFieldMap() {
         return mappedFieldMap;
@@ -32,6 +45,14 @@ public class FieldMappingResult {
 
     public void addMappedField(PsiMethod toSetter, PsiMethod fromGetter) {
         mappedFieldMap.put(toSetter, fromGetter);
+    }
+
+    public void addMappedListField(PsiMethod toSetter, PsiMethod fromGetter) {
+        mappedListMap.put(toSetter, fromGetter);
+    }
+
+    public void addMappedObjectField(PsiMethod toSetter, PsiMethod fromGetter) {
+        mappedObjectMap.put(toSetter, fromGetter);
     }
 
     public void addNotMappedToField(String toField) {

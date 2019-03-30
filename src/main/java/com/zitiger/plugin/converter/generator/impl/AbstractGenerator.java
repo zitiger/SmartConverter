@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractGenerator implements ConverterGenerator {
 
+    @Override
     public void generate(@NotNull PsiMethod psiMethod) {
 
         PsiClass psiClass = (PsiClass) psiMethod.getParent();

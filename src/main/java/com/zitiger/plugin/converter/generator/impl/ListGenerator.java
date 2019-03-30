@@ -16,7 +16,7 @@ import com.zitiger.plugin.converter.exception.ConverterException;
 import com.zitiger.plugin.converter.util.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class ListGenerator extends SingleGenerator {
+public class ListGenerator extends MethodGenerator {
 
     @Override
     void generateCode(PsiClass psiClass, PsiMethod psiMethod) throws ConverterException {
@@ -42,6 +42,8 @@ public class ListGenerator extends SingleGenerator {
         String singleConvertMethodName = singleMethod.getName();
         String returnListName = StringUtils.toCamelCase(returnGenericClassName) + "List";
 
+        psiMethod.getBody().add(createPsiStatement(psiClass, "if(" + paramVariableName + " == null) {\nreturn java.util.Collections.emptyList();\n}"));
+
         psiMethod.getBody().add(createPsiStatement(psiClass, "List<" + returnGenericClassName + "> " + returnListName + "= new java.util.ArrayList<>();"));
         psiMethod.getBody()
                 .add(createPsiStatement(psiClass, "for (" + paramGenericClassName + " " + camelParamGenericClassName + " : " + paramVariableName + ")"));
@@ -61,10 +63,10 @@ public class ListGenerator extends SingleGenerator {
         return elementFactory.createStatementFromText(codeLine, psiClass);
     }
 
-    private PsiMethod createSingleConvertMethod(PsiClass psiClass, String paramGenericClassName, String returnGenericClassName) throws ConverterException {
+    protected PsiMethod createSingleConvertMethod(PsiClass psiClass, String paramGenericClassName, String returnGenericClassName) throws ConverterException {
         PsiElementFactory elementFactory = JavaPsiFacade.getElementFactory(psiClass.getProject());
 
-        StringBuilder sbSingleConvertMethod = new StringBuilder("private static ");
+        StringBuilder sbSingleConvertMethod = new StringBuilder("public static ");
         sbSingleConvertMethod.append(returnGenericClassName);
         sbSingleConvertMethod.append(" to" + returnGenericClassName + "(");
         sbSingleConvertMethod.append(paramGenericClassName);
@@ -107,7 +109,13 @@ public class ListGenerator extends SingleGenerator {
         return null;
     }
 
-    // get the generic type from method param
+    /**
+     * get the generic type from method param
+     *
+     * @param method
+     * @return
+     * @throws ConverterException
+     */
     private PsiClass getGenericParamPsiClass(PsiMethod method) throws ConverterException {
 
         PsiParameter[] parameters = method.getParameterList().getParameters();
@@ -119,7 +127,13 @@ public class ListGenerator extends SingleGenerator {
         return PsiTypesUtil.getPsiClass(paramPsiType);
     }
 
-    // get the generic type from method return
+    /**
+     * get the generic type from method return
+     *
+     * @param method
+     * @return
+     * @throws ConverterException
+     */
     private PsiClass getGenericReturnPsiClass(PsiMethod method) throws ConverterException {
 
         final PsiType returnType = method.getReturnType();
