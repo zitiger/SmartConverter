@@ -2,14 +2,130 @@
     <id>com.zitiger.plugin.converter</id>
     <name>Smart Converter</name>
     <version>1.0</version>
-    <vendor email="support@yourcompany.com" url="https://github.com/zitiger/SmartConverter">zitiger</vendor>
+    <vendor email="zitiger@163.com" url="https://github.com/zitiger/SmartConverter">zitiger</vendor>
 
     <description><![CDATA[
-      Generate get/set code for POJO convert.
+
+
+<h1 id="toc_0">SmartConverter -- POJO Object Converter</h1>
+
+<p>Intellij Idea Plugin for generating the converter method to convert one POJO bean to another. It supports single bean and list convert. It also supports the nested POJO convert.</p>
+
+<h2 id="toc_1">Usage</h2>
+
+<h3 id="toc_2">Four convert methods</h3>
+
+<ol>
+<li>Put the caret in the class, not in any method.</li>
+<li>Press Alt+Ins/CMD+N and select in menu &quot;Smart Converter&quot; or use shortcut Ctrl+Shit+N.</li>
+<li>In the From dialog, select the Class you want to convert From.</li>
+<li>In the To dialog, and select the class you want to convert To.</li>
+<li><p>Press &quot;Ok&quot; and four converter methods will be added to your current class as following:</p></li>
+</ol>
+
+<ul>
+<li>A -&gt; B</li>
+<li>B -&gt; A</li>
+<li>List&lt;A&gt; -&gt; List&lt;B&gt;</li>
+<li>List&lt;B&gt; -&gt; List&lt;A&gt;</li>
+</ul>
+
+<h3 id="toc_3">Single convert method</h3>
+
+<ol>
+<li><p>Finish the converter method signature without any method body as below
+```
+public static UserJO toUserJO(UserDTO userDTO) {</p>
+
+<p>}
+```</p></li>
+<li><p>Put the caret in the above method.</p></li>
+<li><p>Press Alt+Ins/CMD+N and select in menu &quot;Smart Converter&quot; or use shortcut Ctrl+Shit+N.</p></li>
+<li><p>Plugin generates the converter code according to the return type and param type of method.
+<img src="asset/single.gif" alt=""></p></li>
+</ol>
+
+<h4 id="toc_4">Note</h4>
+
+<p>Plugin also writes in comments list of fields, that were not mapped (appropriate setter or getter is missing or different types).</p>
+
+<h1 id="toc_5">SmartConverter -- POJO转换代码生成器</h1>
+
+<h2 id="toc_6">项目背景</h2>
+
+<p>在分层开发中，我们总是面临着各种POJO（DTO,DO,JO,VO）对象之间的相互转换。当对象比较复杂时，编写转换代码耗时较多，且非常容易出错。以至于可能会出现写一天代码，半天在写各种convert的囧境。</p>
+
+<p>为了实现自动转换，出现了BeanUtil和ModelMapper等解决方案。这些方案，在少量对象转换时，性能损耗可以忽略，但是当转换数量达到一定量级时，这种损耗会对性能产生影响。</p>
+
+<p>本插件可以自动生成POJO之间的转换代码，省去手工转换的麻烦，也不会损失性能。</p>
+
+<h2 id="toc_7">使用步骤</h2>
+
+<h3 id="toc_8">安装</h3>
+
+<p>下载SmartConverter.zip，并在Intellij Idea中安装；</p>
+
+<h3 id="toc_9">四个转换函数</h3>
+
+<ol>
+<li>把光标放到函数中，不能是函数内.</li>
+<li>光标移动到函数体内，按下<code>⌘</code>+<code>N</code>，在弹出的<code>Generate</code>菜单中选择<code>Smart Converter</code>;</li>
+<li><p>插件自动生成一下四个转换函数</p></li>
+</ol>
+
+<ul>
+<li>A -&gt; B</li>
+<li>B -&gt; A</li>
+<li>List&lt;A&gt; -&gt; List&lt;B&gt;</li>
+<li>List&lt;B&gt; -&gt; List&lt;A&gt;</li>
+</ul>
+
+<h3 id="toc_10">单个抓换函数</h3>
+
+<ol>
+<li>在编辑器中，确定返回值和参数，完成空转换函数;</li>
+</ol>
+
+<div><pre><code class="language-none">    public static List&lt;UserJO&gt; toDTOList(List&lt;UserDTO&gt; userDTOList) {
+
+    }</code></pre></div>
+
+<ol>
+<li>光标移动到函数体内，按下<code>⌘</code>+<code>N</code>，在弹出的<code>Generate</code>菜单中选择<code>Smart Converter</code>;</li>
+<li>插件根据入参和出参推断出需要转换的POJO。
+<img src="asset/single.gif" alt=""></li>
+</ol>
+
+<h2 id="toc_11">插件特色</h2>
+
+<blockquote>
+<p>插件自动从转换函数的参数和返回值推断出转换POJO；</p>
+
+<p>支持List之间的转换。</p>
+
+<blockquote>
+<p>如果存在单个转换的函数，则直接使用</p>
+
+<p>如果不存在单个转换的函数，创建单个转换函数</p>
+</blockquote>
+
+<p>支持嵌套转换</p>
+</blockquote>
+
+<p><img src="asset/list.gif" alt=""></p>
+
+<h3 id="toc_12">感谢</h3>
+
+<ol>
+<li>https://www.jetbrains.com/help/idea/plugin-development-guidelines.html</li>
+<li>https://github.com/DudarevDaniel/ConverterGenerator</li>
+</ol>
+
+
     ]]></description>
 
     <change-notes><![CDATA[
-            Generate get/set code for POJO convert.
+         It is the initial release of Smart Converter
     ]]>
     </change-notes>
 
