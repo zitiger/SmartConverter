@@ -14,7 +14,6 @@ Intellij Idea Plugin for generating the converter method to convert one POJO bea
 * List&lt;A&gt; -&gt; List&lt;B&gt;
 * List&lt;B&gt; -&gt; List&lt;A&gt;
 
-
 ### Single convert method
 1. Finish the converter method signature without any method body as below
 ```
@@ -25,6 +24,7 @@ Intellij Idea Plugin for generating the converter method to convert one POJO bea
 1. Put the caret in the above method.
 2. Press Alt+Ins/CMD+N and select in menu "Smart Converter" or use shortcut Ctrl+Shit+N.
 2. Plugin generates the converter code according to the return type and param type of method.
+![](asset/single.gif)
 
 
 
@@ -46,8 +46,21 @@ Intellij Idea Plugin for generating the converter method to convert one POJO bea
 
 ## 使用步骤
 
-1. 下载SmartConverter.zip，并在Intellij Idea中安装；
-2. 在编辑器中，确定返回值和函数签名，完成空转换函数;
+### 安装
+下载SmartConverter.zip，并在Intellij Idea中安装；
+
+### 四个转换函数
+1. 把光标放到函数中，不能是函数内.
+2. 光标移动到函数体内，按下``⌘``+``N``，在弹出的``Generate``菜单中选择``Smart Converter``;
+3. 插件自动生成一下四个转换函数
+
+* A -&gt; B
+* B -&gt; A
+* List&lt;A&gt; -&gt; List&lt;B&gt;
+* List&lt;B&gt; -&gt; List&lt;A&gt;
+
+### 单个抓换函数
+1. 在编辑器中，确定返回值和参数，完成空转换函数;
 
 ```
     public static List<UserJO> toDTOList(List<UserDTO> userDTOList) {
@@ -55,18 +68,22 @@ Intellij Idea Plugin for generating the converter method to convert one POJO bea
     }
 ```
 
-3. 光标移动到函数体内，按下``⌘``+``N``，在弹出的``Generate``菜单中选择``Converter``;
+3. 光标移动到函数体内，按下``⌘``+``N``，在弹出的``Generate``菜单中选择``Smart Converter``;
+4. 插件根据入参和出参推断出需要转换的POJO。
 ![](asset/single.gif)
+
+
 
 ## 插件特色
 
 > 插件自动从转换函数的参数和返回值推断出转换POJO；
 > 
 > 支持List之间的转换。
-
 > > 如果存在单个转换的函数，则直接使用
 > > 
 > > 如果不存在单个转换的函数，创建单个转换函数
+> 
+> 支持嵌套转换
 
 ![](asset/list.gif)
 
