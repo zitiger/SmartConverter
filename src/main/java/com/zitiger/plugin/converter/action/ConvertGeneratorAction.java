@@ -24,7 +24,7 @@ import com.zitiger.plugin.converter.util.ContextUtils;
  */
 public class ConvertGeneratorAction extends AnAction {
 
-    public static final String LIST_TYPE_PREX = "List<";
+    private static final String LIST_TYPE_PREFIX = "List<";
 
     @Override
     public void actionPerformed(AnActionEvent e) {
@@ -97,7 +97,7 @@ public class ConvertGeneratorAction extends AnAction {
         }
 
         String type = returnType.getText();
-        if (type.startsWith(LIST_TYPE_PREX)) {
+        if (type.startsWith(LIST_TYPE_PREFIX)) {
             return new ListGenerator();
         } else {
             return new MethodGenerator();

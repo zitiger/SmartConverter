@@ -41,7 +41,7 @@ public abstract class AbstractGenerator implements ConverterGenerator {
      * Generate code
      * @param psiClass class
      * @param psiMethod method
-     * @throws ConverterException
+     * @throws ConverterException exception
      */
     abstract void generateCode(PsiClass psiClass, PsiMethod psiMethod) throws ConverterException;
 

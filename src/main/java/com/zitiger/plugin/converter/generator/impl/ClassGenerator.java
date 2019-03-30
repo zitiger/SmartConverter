@@ -17,7 +17,7 @@ import com.zitiger.plugin.converter.exception.ConverterException;
  */
 public class ClassGenerator extends ListGenerator {
 
-    public void generateCode(PsiClass psiClass, PsiClass fromPsiClass, PsiClass toPsiClass) throws ConverterException {
+    public void generateCode(PsiClass psiClass, PsiClass fromPsiClass, PsiClass toPsiClass) {
 
         new WriteCommandAction.Simple(psiClass.getProject(), psiClass.getContainingFile()) {
 

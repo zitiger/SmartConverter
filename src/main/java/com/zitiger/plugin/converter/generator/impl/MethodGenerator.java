@@ -61,7 +61,7 @@ public class MethodGenerator extends AbstractGenerator {
         processToFields(mappingResult, fromClass, toClass);
         processFromFields(mappingResult, fromClass);
 
-        statementList.addAll(writeMappedFields(psiClass, fromName, toName, mappingResult));
+        statementList.addAll(writeMappedFields(fromName, toName, mappingResult));
         statementList.addAll(writeMappedListFields(psiClass, fromName, toName, mappingResult));
         statementList.addAll(writeMappedObjectFields(psiClass, fromName, toName, mappingResult));
         statementList.addAll(writeNotMappedFields(mappingResult.getNotMappedToFieldList(), "TO"));
@@ -148,7 +148,7 @@ public class MethodGenerator extends AbstractGenerator {
         return builder.toString();
     }
 
-    private List<String> writeMappedFields(PsiClass psiClass, String fromName, String toName, FieldMappingResult mappingResult) {
+    private List<String> writeMappedFields(String fromName, String toName, FieldMappingResult mappingResult) {
         List<String> builder = new ArrayList<>();
 
         for (Map.Entry<PsiMethod, PsiMethod> entry : mappingResult.getMappedFieldMap().entrySet()) {
@@ -216,11 +216,8 @@ public class MethodGenerator extends AbstractGenerator {
         final PsiClass converterClass = PsiTreeUtil.findChildOfAnyType(converterFile.getOriginalElement(), PsiClass.class);
 
         ClassGenerator classGenerator = new ClassGenerator();
-        try {
-            classGenerator.generateCode(converterClass, paramClass, returnClass);
-        } catch (ConverterException e) {
-            e.printStackTrace();
-        }
+
+        classGenerator.generateCode(converterClass, paramClass, returnClass);
 
         JavaCodeStyleManager.getInstance(psiClass.getProject()).shortenClassReferences(converterClass);
     }
@@ -273,13 +270,6 @@ public class MethodGenerator extends AbstractGenerator {
         return ttt.equals(fff);
     }
 
-    /**
-     * get the generic type from method param
-     *
-     * @param method
-     * @return
-     * @throws ConverterException
-     */
     private PsiClass getGenericParamPsiClass(PsiMethod method) {
 
         PsiParameter[] parameters = method.getParameterList().getParameters();
@@ -291,13 +281,6 @@ public class MethodGenerator extends AbstractGenerator {
         return PsiTypesUtil.getPsiClass(paramPsiType);
     }
 
-    /**
-     * get the generic type from method return
-     *
-     * @param method
-     * @return
-     * @throws ConverterException
-     */
     private PsiClass getGenericReturnPsiClass(PsiMethod method) {
 
         final PsiType returnType = method.getReturnType();

@@ -67,7 +67,7 @@ public class ListGenerator extends MethodGenerator {
         return elementFactory.createStatementFromText(codeLine, psiClass);
     }
 
-    protected PsiMethod createSingleConvertMethod(PsiClass psiClass, String paramGenericClassName, String returnGenericClassName) throws ConverterException {
+    private PsiMethod createSingleConvertMethod(PsiClass psiClass, String paramGenericClassName, String returnGenericClassName) throws ConverterException {
         PsiElementFactory elementFactory = JavaPsiFacade.getElementFactory(psiClass.getProject());
 
         StringBuilder sbSingleConvertMethod = new StringBuilder("public static ");
@@ -113,13 +113,6 @@ public class ListGenerator extends MethodGenerator {
         return null;
     }
 
-    /**
-     * get the generic type from method param
-     *
-     * @param method
-     * @return
-     * @throws ConverterException
-     */
     private PsiClass getGenericParamPsiClass(PsiMethod method) throws ConverterException {
 
         PsiParameter[] parameters = method.getParameterList().getParameters();
@@ -131,13 +124,6 @@ public class ListGenerator extends MethodGenerator {
         return PsiTypesUtil.getPsiClass(paramPsiType);
     }
 
-    /**
-     * get the generic type from method return
-     *
-     * @param method
-     * @return
-     * @throws ConverterException
-     */
     private PsiClass getGenericReturnPsiClass(PsiMethod method) throws ConverterException {
 
         final PsiType returnType = method.getReturnType();

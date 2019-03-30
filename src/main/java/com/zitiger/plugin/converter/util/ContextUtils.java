@@ -25,11 +25,7 @@ public class ContextUtils {
         return getPsiElement(e, PsiMethod.class);
     }
 
-    public static PsiVariable getPsiVariable(AnActionEvent e) {
-        return getPsiElement(e, PsiVariable.class);
-    }
-
-    public static PsiElement getPsiElement(AnActionEvent e) {
+    private static PsiElement getPsiElement(AnActionEvent e) {
         PsiFile psiFile = e.getData(LangDataKeys.PSI_FILE);
         Editor editor = e.getData(PlatformDataKeys.EDITOR);
         if (psiFile == null || editor == null) {
@@ -40,7 +36,7 @@ public class ContextUtils {
 
     }
 
-    public static <T extends PsiElement> T getPsiElement(AnActionEvent e, Class<T> clazz) {
+    private static <T extends PsiElement> T getPsiElement(AnActionEvent e, Class<T> clazz) {
 
         PsiElement elementAt = getPsiElement(e);
         return PsiTreeUtil.getParentOfType(elementAt, clazz);
