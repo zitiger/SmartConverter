@@ -18,9 +18,9 @@ import com.intellij.psi.PsiType;
 import com.intellij.psi.codeStyle.JavaCodeStyleManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiTypesUtil;
-import com.sun.xml.internal.ws.util.StringUtils;
 import com.zitiger.plugin.converter.exception.ConverterException;
 import com.zitiger.plugin.converter.model.FieldMappingResult;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,7 +44,7 @@ public class MethodGenerator extends AbstractGenerator {
         PsiClass toClass = getReturnPsiClass(psiMethod);
 
         // camel
-        String toName = StringUtils.decapitalize(toClass.getName());
+        String toName = StringUtils.uncapitalize(toClass.getName());
 
         String fromName = psiMethod.getParameterList().getParameters()[0].getName();
 

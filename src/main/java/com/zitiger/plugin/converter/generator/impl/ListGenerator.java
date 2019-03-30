@@ -12,8 +12,8 @@ import com.intellij.psi.PsiStatement;
 import com.intellij.psi.PsiType;
 import com.intellij.psi.codeStyle.JavaCodeStyleManager;
 import com.intellij.psi.util.PsiTypesUtil;
-import com.sun.xml.internal.ws.util.StringUtils;
 import com.zitiger.plugin.converter.exception.ConverterException;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class ListGenerator extends MethodGenerator {
@@ -28,7 +28,7 @@ public class ListGenerator extends MethodGenerator {
         PsiElementFactory elementFactory = JavaPsiFacade.getElementFactory(psiClass.getProject());
         String returnGenericClassName = getGenericReturnPsiClass(psiMethod).getName();
         String paramGenericClassName = getGenericParamPsiClass(psiMethod).getName();
-        String camelParamGenericClassName = StringUtils.decapitalize(paramGenericClassName);
+        String camelParamGenericClassName = StringUtils.uncapitalize(paramGenericClassName);
         String paramVariableName = psiMethod.getParameterList().getParameters()[0].getName();
 
         // match single converter according to param class and return class
@@ -40,7 +40,7 @@ public class ListGenerator extends MethodGenerator {
         }
 
         String singleConvertMethodName = singleMethod.getName();
-        String returnListName = StringUtils.decapitalize(returnGenericClassName) + "List";
+        String returnListName = StringUtils.uncapitalize(returnGenericClassName) + "List";
 
         psiMethod.getBody().add(createPsiStatement(psiClass, "if(" + paramVariableName + " == null) {\nreturn java.util.Collections.emptyList();\n}"));
 
@@ -71,7 +71,7 @@ public class ListGenerator extends MethodGenerator {
         sbSingleConvertMethod.append(" to" + returnGenericClassName + "(");
         sbSingleConvertMethod.append(paramGenericClassName);
         sbSingleConvertMethod.append(" ");
-        sbSingleConvertMethod.append(StringUtils.decapitalize(paramGenericClassName));
+        sbSingleConvertMethod.append(StringUtils.uncapitalize(paramGenericClassName));
         sbSingleConvertMethod.append(") {\n");
         sbSingleConvertMethod.append("}\n");
 

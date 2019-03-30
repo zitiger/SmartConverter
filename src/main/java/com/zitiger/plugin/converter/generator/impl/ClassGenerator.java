@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementFactory;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.codeStyle.JavaCodeStyleManager;
-import com.sun.xml.internal.ws.util.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import com.zitiger.plugin.converter.exception.ConverterException;
 
 public class ClassGenerator extends ListGenerator {
@@ -49,7 +49,7 @@ public class ClassGenerator extends ListGenerator {
         sbSingleConvertMethod.append("> " + methodName + "(List<");
         sbSingleConvertMethod.append(fromPsiClass.getQualifiedName());
         sbSingleConvertMethod.append("> ");
-        sbSingleConvertMethod.append(StringUtils.decapitalize(fromPsiClass.getName()));
+        sbSingleConvertMethod.append(StringUtils.uncapitalize(fromPsiClass.getName()));
         sbSingleConvertMethod.append("List) {\n");
         sbSingleConvertMethod.append("}\n");
 
