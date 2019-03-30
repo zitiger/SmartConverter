@@ -6,7 +6,6 @@
 
     <description><![CDATA[
 
-
 <h1 id="toc_0">SmartConverter -- POJO Object Converter</h1>
 
 <p>Intellij Idea Plugin for generating the converter method to convert one POJO bean to another. It supports single bean and list convert. It also supports the nested POJO convert.</p>
@@ -34,11 +33,10 @@
 
 <ol>
 <li><p>Finish the converter method signature without any method body as below
-```
-public static UserJO toUserJO(UserDTO userDTO) {</p>
+<div><pre>public static UserJO toUserJO(UserDTO userDTO) {
 
-<p>}
-```</p></li>
+}</pre></div>
+</li>
 <li><p>Put the caret in the above method.</p></li>
 <li><p>Press Alt+Ins/CMD+N and select in menu &quot;Smart Converter&quot; or use shortcut Ctrl+Shit+N.</p></li>
 <li><p>Plugin generates the converter code according to the return type and param type of method.
@@ -80,17 +78,16 @@ public static UserJO toUserJO(UserDTO userDTO) {</p>
 <li>List&lt;B&gt; -&gt; List&lt;A&gt;</li>
 </ul>
 
-<h3 id="toc_10">单个抓换函数</h3>
+<h3 id="toc_10">单个转换函数</h3>
 
 <ol>
 <li>在编辑器中，确定返回值和参数，完成空转换函数;</li>
-</ol>
+
 
 <div><pre><code class="language-none">    public static List&lt;UserJO&gt; toDTOList(List&lt;UserDTO&gt; userDTOList) {
 
     }</code></pre></div>
 
-<ol>
 <li>光标移动到函数体内，按下<code>⌘</code>+<code>N</code>，在弹出的<code>Generate</code>菜单中选择<code>Smart Converter</code>;</li>
 <li>插件根据入参和出参推断出需要转换的POJO。
 <img src="asset/single.gif" alt=""></li>
