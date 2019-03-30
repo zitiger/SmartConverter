@@ -1,4 +1,40 @@
+# SmartConverter -- POJO Object Converter
+Intellij Idea Plugin for generating the converter method to convert one POJO bean to another. It supports single bean and list convert. It also supports the nested POJO convert.
+
+## Usage
+### Four convert methods
+1. Put the caret in the class, not in any method.
+2. Press Alt+Ins/CMD+N and select in menu "Smart Converter" or use shortcut Ctrl+Shit+N.
+2. In the From dialog, select the Class you want to convert From.
+3. In the To dialog, and select the class you want to convert To.
+4. Press "Ok" and four converter methods will be added to your current class as following:
+
+* A -&gt; B
+* B -&gt; A
+* List&lt;A&gt; -&gt; List&lt;B&gt;
+* List&lt;B&gt; -&gt; List&lt;A&gt;
+
+
+### Single convert method
+1. Finish the converter method signature without any method body as below
+```
+    public static UserJO toUserJO(UserDTO userDTO) {
+
+    }
+```
+1. Put the caret in the above method.
+2. Press Alt+Ins/CMD+N and select in menu "Smart Converter" or use shortcut Ctrl+Shit+N.
+2. Plugin generates the converter code according to the return type and param type of method.
+
+
+
+####Note
+ Plugin also writes in comments list of fields, that were not mapped (appropriate setter or getter is missing or different types).
+
+
+
 # SmartConverter -- POJO转换代码生成器
+
 
 ## 项目背景
 在分层开发中，我们总是面临着各种POJO（DTO,DO,JO,VO）对象之间的相互转换。当对象比较复杂时，编写转换代码耗时较多，且非常容易出错。以至于可能会出现写一天代码，半天在写各种convert的囧境。
