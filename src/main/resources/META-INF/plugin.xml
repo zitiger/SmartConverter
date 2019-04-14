@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.zitiger.plugin.converter</id>
-    <name>Smart Converter</name>
+    <name>Smart POJO Converter</name>
     <version>1.0</version>
     <vendor email="zitiger@163.com" url="https://github.com/zitiger/SmartConverter">zitiger</vendor>
 
@@ -127,7 +127,7 @@
     </change-notes>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-    <idea-version since-build="142.4783"/>
+    <idea-version since-build="145.0"/>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
