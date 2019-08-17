@@ -1,21 +1,7 @@
 package com.zitiger.plugin.converter.generator.impl;
 
 import com.intellij.lang.java.JavaLanguage;
-import com.intellij.psi.JavaPsiFacade;
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiClassType;
-import com.intellij.psi.PsiCodeBlock;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementFactory;
-import com.intellij.psi.PsiField;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiFileFactory;
-import com.intellij.psi.PsiJavaFile;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiModifier;
-import com.intellij.psi.PsiParameter;
-import com.intellij.psi.PsiType;
+import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.JavaCodeStyleManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiTypesUtil;
@@ -109,7 +95,7 @@ public class MethodGenerator extends AbstractGenerator {
                     }
                 }
 
-                if (isMatchingFieldType2(toField, fromGetter)) {
+                if (isMatchingNearbyFieldType(toField, fromGetter)) {
                     mappingResult.addMappedObjectField(toSetter, fromGetter);
                     continue;
                 }
@@ -259,14 +245,15 @@ public class MethodGenerator extends AbstractGenerator {
         return fromGetterReturnType != null && toFieldType.isAssignableFrom(fromGetterReturnType);
     }
 
-    private boolean isMatchingFieldType2(PsiField toField, PsiMethod fromGetter) {
+    private boolean isMatchingNearbyFieldType(PsiField toField, PsiMethod fromGetter) {
         PsiClass fromGetterReturnType = PsiTypesUtil.getPsiClass(fromGetter.getReturnType());
         PsiClass toFieldType = PsiTypesUtil.getPsiClass(toField.getType());
-
-        String fff = removeSuffix(fromGetterReturnType.getName());
-        String ttt = removeSuffix(toFieldType.getName());
-
-        return ttt.equals(fff);
+        if (fromGetterReturnType == null || toFieldType == null) {
+            return false;
+        }
+        String fromTypeName = removeSuffix(fromGetter.getReturnType().getCanonicalText());
+        String toTypeName = removeSuffix(toField.getType().getCanonicalText());
+        return toTypeName.equals(fromTypeName);
     }
 
     private PsiClass getGenericParamPsiClass(PsiMethod method) {
